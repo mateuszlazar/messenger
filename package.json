@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "sh -ac '. ./.env;   firebase use live   && react-scripts start'",
-    "build": " sh -ac '. ./.env;  firebase use live  && react-scripts build'",
+    "build": "sh -ac '. ./.env;  firebase use live  && react-scripts build && mv build dist'",
     "deploy": "bash ./scripts/deploy.sh",
     "release": "npm run build && npm run deploy"
   },

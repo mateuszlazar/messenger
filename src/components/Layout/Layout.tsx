@@ -11,7 +11,7 @@ import { HeaderLink } from "app/styled";
 export const Layout: React.FC = ({ children }) => (
   <HeaderFooterWrapper>
     <Header>
-      <HeaderLink to="/">Firefly</HeaderLink>
+      <HeaderLink to="/">Messenger</HeaderLink>
 
       <div style={{ float: "right" }}>
         <HeaderLink to="/search">

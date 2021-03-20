@@ -5,9 +5,11 @@ import { RoomsService } from "services/rooms";
 import { IRoom } from "services/rooms/IRoom";
 
 export const Profile: React.FC<any> = ({ auth }) => {
+  const [newRoomName, setNewRoomName] = useState<string>("");
   const [rooms, setRooms] = useState<IRoom[]>([]);
 
   useEffect(() => {
+    // @ts-ignore
     RoomsService.get().then(setRooms);
   }, []);
 
@@ -27,8 +29,17 @@ export const Profile: React.FC<any> = ({ auth }) => {
           <p>{auth.email}</p>
           +++
           {rooms.map((room) => (
-            <span>{room.name}</span>
+            <section>
+              <p>{room.name}</p>
+              <button onClick={() => RoomsService.remove(room)}>
+                DELETE {room.name} ROOM
+              </button>
+            </section>
           ))}
+          <input
+            onChange={(e) => setNewRoomName(e.target.value)}
+            value={newRoomName}
+          />
           <button onClick={() => RoomsService.add({ name: "Test" })}>
             CREATE ROOM
           </button>
