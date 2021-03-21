@@ -5,6 +5,12 @@ import { IRoom } from "./IRoom";
 
 const RoomsCollection = () => Firebase.firestore().collection("rooms");
 
+const onUpdate = async (callback: any) =>
+  RoomsCollection().onSnapshot((snapshot) => {
+    const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    return callback(data);
+  });
+
 const get = async () =>
   RoomsCollection()
     .get()
@@ -39,4 +45,4 @@ const remove = ({ id }: IRoom) =>
       alert(`Whoops, couldn't delete the post: ${error.message}`);
     });
 
-export const RoomsService = { get, add, remove };
+export const RoomsService = { onUpdate, get, add, remove };

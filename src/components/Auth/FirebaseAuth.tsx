@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Firebase from "firebase/app";
 import { IFirebaseAuthProps } from "./IFirebaseAuth";
+import logIn from "actions/logIn";
+import { useRecoilState } from "recoil";
+import { authState } from "store/auth";
 
 // @ts-ignore : @todo
-export const FirebaseAuth: React.FC<IFirebaseAuthProps> = ({ children }) => {
+export const FirebaseAuth: React.FC<IFirebaseAuthProps> = () => {
   const [error, setError] = useState<any>(null);
-  const [auth, setAuth] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [auth, setAuth] = useRecoilState(authState);
 
   useEffect(
     () =>
@@ -23,5 +26,15 @@ export const FirebaseAuth: React.FC<IFirebaseAuthProps> = ({ children }) => {
     []
   );
 
-  return children({ auth, error, loading });
+  if (loading) {
+    return "...";
+  }
+  if (error) {
+    return "⚠️ login error";
+  }
+  if (auth) {
+    return <span> loggen in</span>;
+  } else {
+    return <button onClick={logIn}>log in</button>;
+  }
 };

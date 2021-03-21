@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
+import { useRecoilState } from "recoil";
 
 import { RoomsService } from "services/rooms";
 import { IRoom } from "services/rooms/IRoom";
+import { authState } from "store/auth";
 
-export const Profile: React.FC<any> = ({ auth }) => {
+export const Profile: React.FC<any> = () => {
   const [newRoomName, setNewRoomName] = useState<string>("");
   const [rooms, setRooms] = useState<IRoom[]>([]);
 
+  const [auth, setAuth] = useRecoilState(authState);
+
   useEffect(() => {
-    // @ts-ignore
-    RoomsService.get().then(setRooms);
+    RoomsService.onUpdate(setRooms);
   }, []);
 
   return (

@@ -1,27 +1,17 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-const HeaderFooterWrapper = styled.div`
-  max-width: 500px;
-  margin: 0 auto;
+const Container = styled.div`
   display: grid;
-  grid-template-rows: max-content auto max-content;
+  grid-template-columns: 400px 1fr;
+  grid-template-rows: 1fr;
   min-height: 100vh;
-`
-const Header = styled.div`
-  padding: 2rem 1rem 1rem;
-`
-const Page = styled.div`
-  padding: 1rem;
-`
-const Footer = styled.div`
-  padding: 1rem;
-  text-align: center;
-  opacity: .3;
-`
+  min-width: 100vw;
+`;
 
-export {
-  HeaderFooterWrapper,
-  Header,
-  Page,
-  Footer,
-}
+const Sidebar = styled.nav`
+  border-right: 1px solid #ccc;
+`;
+
+const Main = styled.main``;
+
+export { Container, Main, Sidebar };
